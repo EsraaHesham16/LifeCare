@@ -96,56 +96,91 @@ class Reports:
         sleep_hours=0
         steps=0
 
+        water_found=False
         for i in water:
             if i["user_id"]==user_id and i["date"] == today:
+                water_found=True
                 water_cups=i["cups"]
                 print(f"water:{water_cups} cups")
+        if not water_found :
+            print("no water data ")
 
+
+        sleep_found=False
         for i in sleep:
             if i["user_id"]==user_id and i["date"] == today:
+                sleep_found=True
                 sleep_hours=i["hours"]
                 print(f"sleep:{sleep_hours } hours")
+        if not sleep_found:
+            print("no sleep data ")
 
+        activity_found=False
         for i in activity :
             if i["user_id"]==user_id and i["date"] == today:
+                activity_found=True
                 steps=i["steps"]
                 print(f"steps:{steps} ")
+
+        if not activity_found:
+            print("no activity data ")
+
+        mood_found=False
         mood_status=""
         for i in mood:
             if i["user_id"]==user_id and i["date"] == today:
+                mood_found=True
                 mood_status=i["mood"]
                 print(f"mood: {mood_status }")
+        if not mood_found:
+            print("no mood data ")
 
         print("\nMEDICINE")
-        today=datetime.today().strftime("%Y-%m-%d")
-        for i in medicine:
-            if i ["user_id"]==user_id:
-                print(f"{i['medicine_name']} - {i['dose']}")
+        if not medicine :
+            print("no medicine data available")
+        else:
+            today=datetime .today().strftime("%Y-%m-%d")
+            found =False
+            
+            for i in medicine :
+                if i ["user_id"]==user_id:
+                    found=True
+                    print(f"{i['medicine_name']} - {i['dose']}")
 
-                if today in i["taken"]:
-                    for j in range(len(i["times"])):
-                        time=i["times"][j]
-                        status=i["taken"][today][j]
+                    if today in i["taken"]:
+                        for j in range(len(i["times"])):
+                            time=i["times"][j]
+                            status=i["taken"][today][j]
 
-                        if status :
-                            print(f"{time} :taken")
-                        else:
-                            print(f"{time} :missed")
-                else:
-                    print("no doses recorded tody")
+                            if status :
+                                print(f"{time} :taken")
+                            else:
+                                print(f"{time} :missed")
+                    else:
+                         print("no doses recorded tody")
+            if not found:
+                print("no medicine data for this user")
 
 
         print("\nAppointments")
-        today = datetime.today().strftime("%Y-%m-%d")
-        for i in appointments :
-            if i["user_id"] == user_id and i["date"]==today :
-                print(f"title :{i['title']}")
-                print(f"doctor:{i['doctor']}")
-                print(f"clinic:{i['clinic']}")
-                print(f"date :{i['title']}")
-                print(f"time:{i['time']}")
-                print(f"status :{i['status']}")
-                print(f"notes :{i['notes']}")
+        if not appointments:
+            print("no appointment data available")
+        else:
+            today = datetime.today().strftime("%Y-%m-%d")
+            found=False
+            for i in appointments :
+                if i["user_id"] == user_id and i["date"]==today :
+                    found=True
+                    print(f"title :{i['title']}")
+                    print(f"doctor:{i['doctor']}")
+                    print(f"clinic:{i['clinic']}")
+                    print(f"date :{i['date']}")
+                    print(f"time:{i['time']}")
+                    print(f"status :{i['status']}")
+                    print(f"notes :{i['notes']}")
+
+            if not found:
+                print("no appointments found")
 
 
         score=self.calculate_health_score(water_cups,sleep_hours,steps,mood_status )
@@ -245,8 +280,11 @@ class Reports:
                                missed+=1
 
         print("\nMedicine Summary")
-        print(f"taken: {taken }")
-        print(f"missed: {missed}")
+        if taken==0 and missed==0:
+           print("no medicine data available")
+        else:
+            print(f"taken: {taken}")
+            print(f"missed: {missed}")
 
 
         for i in appointments :
@@ -258,11 +296,15 @@ class Reports:
                 print(f"\ntitle :{i['title']}")
                 print(f"doctor:{i['doctor']}")
                 print(f"clinic:{i['clinic']}")
-                print(f"date :{i['title']}")
+                print(f"date :{i['date']}")
                 print(f"time:{i['time']}")
                 print(f"status :{i['status']}")
                 print(f"notes :{i['notes']}")
-        print(f"total appointments: {appointment_count}")
+
+            if appointment_count==0:
+                print("no appointments available")
+            else:
+                print(f"total appointments: {appointment_count}")
 
 
 
@@ -381,8 +423,11 @@ class Reports:
                                  missed += 1
 
         print("\nMedicine Summary")
-        print(f"taken: {taken }")
-        print(f"missed: {missed}")
+        if taken==0 and missed==0:
+           print("no medicine data available")
+        else:
+            print(f"taken: {taken}")
+            print(f"missed: {missed}")
 
         for i in appointments :
             record_data = datetime.strptime(i["date"], "%Y-%m-%d")
@@ -392,12 +437,15 @@ class Reports:
                 print(f"title :{i['title']}")
                 print(f"doctor:{i['doctor']}")
                 print(f"clinic:{i['clinic']}")
-                print(f"date :{i['title']}")
+                print(f"date :{i['date']}")
                 print(f"time:{i['time']}")
                 print(f"status :{i['status']}")
                 print(f"notes :{i['notes']}")
 
-        print(f"total appointments: {appointment_count }")
+            if appointment_count==0:
+                print("no appointments available")
+            else:
+                print(f"total appointments: {appointment_count}")
 
 
         # score=self.calculate_health_score(total_water,total_sleep ,total_steps )

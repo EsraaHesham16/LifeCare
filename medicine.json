@@ -2,7 +2,7 @@
     {
         "medicine_id": 1,
         "user_id": "33",
-        "medicine_name": "ll",
+        "medicine_name": "Paracetamol",
         "dose": "20",
         "times_per_day": 1,
         "times": [
@@ -20,35 +20,83 @@
     },
     {
         "medicine_id": 2,
-        "user_id": "34",
-        "medicine_name": "jn",
-        "dose": "88",
+        "user_id": "33",
+        "medicine_name": "Amoxicillin",
+        "dose": "80gm",
         "times_per_day": 3,
         "times": [
             "12:00",
-            "12:00",
-            "12:00"
+            "13:00",
+            "14:00"
         ],
         "start_date": "2026-08-08",
-        "end_date": "2026-08-09",
+        "end_date": "2026-09-08",
+        "taken": {
+            "2026-08-08": [
+                false,
+                false,
+                true
+            ]
+        },
+        "completion_notified": false,
+        "reminder_notified": false
+    },
+    {
+        "medicine_id": 3,
+        "user_id": "29",
+        "medicine_name": "Ibuprofen",
+        "dose": "80gm",
+        "times_per_day": 3,
+        "times": [
+            "12:00",
+            "13:00",
+            "14:00"
+        ],
+        "start_date": "2026-08-08",
+        "end_date": "2026-09-16",
         "taken": {},
         "completion_notified": false,
         "reminder_notified": false
     },
     {
         "medicine_id": 4,
-        "user_id": "34",
-        "medicine_name": "kkkk",
-        "dose": "88",
+        "user_id": "42",
+        "medicine_name": "Cetirizine",
+        "dose": "80gm",
         "times_per_day": 3,
         "times": [
             "12:00",
-            "12:00",
-            "12:00"
+            "13:00",
+            "14:00"
         ],
         "start_date": "2026-08-08",
-        "end_date": "2026-08-09",
+        "end_date": "2026-09-16",
         "taken": {},
+        "completion_notified": false,
+        "reminder_notified": false
+    },
+    {
+        "medicine_id": 5,
+        "user_id": "45",
+        "medicine_name": "egnierg",
+        "dose": "40gm",
+        "times_per_day": 4,
+        "times": [
+            "12:00",
+            "13:00",
+            "14:00",
+            "15:00"
+        ],
+        "start_date": "2026-08-08",
+        "end_date": "2026-08-08",
+        "taken": {
+            "2026-08-08": [
+                true,
+                true,
+                false,
+                true
+            ]
+        },
         "completion_notified": false,
         "reminder_notified": false
     }

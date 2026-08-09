@@ -24,10 +24,11 @@ def open_program():
         print(f"1.Register\n2.Login\n3.Exit")
         choice = input("Enter your choice:")
         if choice=="1" or choice=="register":
-            program = True
             print("\nPlease enter your information")
-            user_id=user1.register()
-            break
+            user_id = user1.register()
+            if user_id:
+                program = True
+                break
         elif choice=="2" or choice=="login":           
             user_id=user1.login()
             if user_id:

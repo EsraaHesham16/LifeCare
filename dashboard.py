@@ -9,11 +9,6 @@ class DashBoard:
         # users = users.get_user(str(user_id))
         return users.get(str(user_id))
 
-        for user in users :
-            if user["user_id"]==user_id :
-                return user
-        return None
-
     def get_water(self,user_id):
         with open("water.json","r")as file:
             data=json.load(file)

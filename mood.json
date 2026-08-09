@@ -1,23 +1,18 @@
 [
     {
         "user_id": "33",
-        "date": "2026-08-08",
-        "mood": "sad"
-    },
-    {
-        "user_id": "33",
         "date": "2026-08-07",
         "mood": "sad"
     },
     {
         "user_id": "33",
         "date": "2026-08-06",
-        "mood": "sad"
+        "mood": "normal"
     },
     {
         "user_id": "33",
         "date": "2026-08-05",
-        "mood": "sad"
+        "mood": "tired"
     },
     {
         "user_id": "33",
@@ -32,16 +27,31 @@
     {
         "user_id": "33",
         "date": "2026-08-02",
-        "mood": "sad"
+        "mood": "happy"
     },
     {
-        "user_id": "34",
+        "user_id": "29",
+        "date": "2026-08-08",
+        "mood": "happy"
+    },
+    {
+        "user_id": "42",
+        "date": "2026-08-08",
+        "mood": "happy"
+    },
+    {
+        "user_id": "3",
         "date": "2026-08-08",
         "mood": "sad"
     },
     {
-        "user_id": "44",
-        "date": "2026-08-09",
+        "user_id": "33",
+        "date": "2026-08-08",
+        "mood": "happy"
+    },
+    {
+        "user_id": "45",
+        "date": "2026-08-08",
         "mood": "sad"
     }
 ]

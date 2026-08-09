@@ -66,7 +66,7 @@ class WaterTracker:
         for record in user_water:
             record_date = datetime.strptime(record["date"], "%Y-%m-%d").date()
             if record_date == expected_day:
-                if record["cups"] == 8:
+                if record["cups"] >=8:
                     streak += 1
                     expected_day -= timedelta(days=1)
                 else:

@@ -1,12 +1,6 @@
 [
     {
         "user_id": "33",
-        "date": "2026-08-08",
-        "cups": 2,
-        "goal": 8
-    },
-    {
-        "user_id": "33",
         "date": "2026-08-07",
         "cups": 2,
         "goal": 8
@@ -14,49 +8,79 @@
     {
         "user_id": "33",
         "date": "2026-08-06",
-        "cups": 2,
+        "cups": 8,
         "goal": 8
     },
     {
         "user_id": "33",
         "date": "2026-08-05",
-        "cups": 2,
+        "cups": 4,
         "goal": 8
     },
     {
         "user_id": "33",
         "date": "2026-08-04",
-        "cups": 2,
+        "cups": 7,
         "goal": 8
     },
     {
         "user_id": "33",
         "date": "2026-08-03",
-        "cups": 2,
+        "cups": 8,
         "goal": 8
     },
     {
         "user_id": "33",
         "date": "2026-08-02",
-        "cups": 2,
+        "cups": 9,
         "goal": 8
     },
     {
         "user_id": "41",
         "date": "2026-08-08",
-        "cups": 1,
+        "cups": 5,
         "goal": 8
     },
     {
-        "user_id": "34",
+        "user_id": "27",
+        "date": "2026-08-08",
+        "cups": 9,
+        "goal": 8
+    },
+    {
+        "user_id": "29",
+        "date": "2026-08-08",
+        "cups": 16,
+        "goal": 8
+    },
+    {
+        "user_id": "42",
+        "date": "2026-08-08",
+        "cups": 62,
+        "goal": 8
+    },
+    {
+        "user_id": "43",
+        "date": "2026-08-08",
+        "cups": 7,
+        "goal": 8
+    },
+    {
+        "user_id": "3",
+        "date": "2026-08-08",
+        "cups": 2,
+        "goal": 8
+    },
+    {
+        "user_id": "33",
         "date": "2026-08-08",
         "cups": 8,
         "goal": 8
     },
     {
-        "user_id": "44",
-        "date": "2026-08-09",
-        "cups": 4,
+        "user_id": "45",
+        "date": "2026-08-08",
+        "cups": 13,
         "goal": 8
     }
 ]
