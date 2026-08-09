@@ -1,0 +1,56 @@
+[
+    {
+        "user_id": "33",
+        "date": "2026-08-08",
+        "steps": 5000,
+        "duration": 30
+    },
+    {
+        "user_id": "33",
+        "date": "2026-08-07",
+        "steps": 5000,
+        "duration": 30
+    },
+    {
+        "user_id": "33",
+        "date": "2026-08-06",
+        "steps": 5000,
+        "duration": 30
+    },
+    {
+        "user_id": "33",
+        "date": "2026-08-05",
+        "steps": 5000,
+        "duration": 30
+    },
+    {
+        "user_id": "33",
+        "date": "2026-08-04",
+        "steps": 5000,
+        "duration": 30
+    },
+    {
+        "user_id": "33",
+        "date": "2026-08-03",
+        "steps": 5000,
+        "duration": 30
+    },
+    {
+        "user_id": "33",
+        "date": "2026-08-02",
+        "steps": 5000,
+        "duration": 30
+    },
+    {
+        "user_id": "34",
+        "date": "2026-08-08",
+        "steps": 500,
+        "duration": 10
+    },
+    {
+        "user_id": "44",
+        "date": "2026-08-09",
+        "steps": 5000,
+        "duration": 30
+    }
+]

@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Life Care - Health & Wellness Dashboard</title>
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dark-theme">
+  <div id="app">
+    <!-- Auth Screen -->
+    <div id="auth-container" class="auth-wrapper">
+      <div class="auth-glass-card">
+        <div class="auth-header">
+          <div class="brand-logo">
+            <i class="fa-solid fa-heart-pulse logo-icon"></i>
+            <span>Life Care</span>
+          </div>
+          <p class="auth-subtitle">Your Personal Health & Wellness Hub</p>
+        </div>
+
+        <!-- Auth Tabs -->
+        <div class="auth-tabs">
+          <button id="tab-login-btn" class="auth-tab active" onclick="switchAuthTab('login')">Sign In</button>
+          <button id="tab-register-btn" class="auth-tab" onclick="switchAuthTab('register')">Register</button>
+        </div>
+
+        <div id="auth-error-msg" class="auth-alert hidden"></div>
+
+        <!-- Login Form -->
+        <form id="login-form" class="auth-form" onsubmit="handleLogin(event)">
+          <div class="input-group">
+            <label><i class="fa-solid fa-envelope"></i> Email Address</label>
+            <input type="email" id="login-email" placeholder="rahma5797@gmail.com" required>
+          </div>
+          <div class="input-group">
+            <label><i class="fa-solid fa-lock"></i> Password</label>
+            <input type="password" id="login-password" placeholder="••••••••" required>
+          </div>
+          <button type="submit" class="btn-primary auth-submit-btn">
+            <span>Sign In</span> <i class="fa-solid fa-arrow-right"></i>
+          </button>
+          
+          <div class="demo-login-box">
+            <p>Or quick login as demo user:</p>
+            <button type="button" class="btn-secondary btn-sm" onclick="demoLogin('rahma5797@gmail.com', 'guhweifihiy')">
+              <i class="fa-solid fa-user-check"></i> Demo User (Rahma)
+            </button>
+          </div>
+        </form>
+
+        <!-- Register Form -->
+        <form id="register-form" class="auth-form hidden" onsubmit="handleRegister(event)">
+          <div class="input-group">
+            <label><i class="fa-solid fa-user"></i> Full Name</label>
+            <input type="text" id="reg-name" placeholder="e.g. Rahma Nagy" required>
+          </div>
+          <div class="input-group">
+            <label><i class="fa-solid fa-envelope"></i> Email Address</label>
+            <input type="email" id="reg-email" placeholder="name@domain.com" required>
+          </div>
+          <div class="input-group">
+            <label><i class="fa-solid fa-lock"></i> Password (min 8 chars, no spaces)</label>
+            <input type="password" id="reg-password" placeholder="At least 8 characters" required>
+          </div>
+          <button type="submit" class="btn-primary auth-submit-btn">
+            <span>Create Account</span> <i class="fa-solid fa-user-plus"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Main Dashboard App Layout -->
+    <div id="main-app" class="main-layout hidden">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar">
+        <div class="sidebar-brand">
+          <i class="fa-solid fa-heart-pulse logo-icon"></i>
+          <span class="brand-text">Life Care</span>
+        </div>
+
+        <nav class="sidebar-nav">
+          <button class="nav-item active" data-tab="dashboard" onclick="navigateTo('dashboard')">
+            <i class="fa-solid fa-chart-pie"></i>
+            <span>Overview</span>
+          </button>
+          <button class="nav-item" data-tab="water" onclick="navigateTo('water')">
+            <i class="fa-solid fa-glass-water"></i>
+            <span>Water Tracker</span>
+          </button>
+          <button class="nav-item" data-tab="sleep" onclick="navigateTo('sleep')">
+            <i class="fa-solid fa-moon"></i>
+            <span>Sleep Studio</span>
+          </button>
+          <button class="nav-item" data-tab="activity" onclick="navigateTo('activity')">
+            <i class="fa-solid fa-person-walking"></i>
+            <span>Activity Hub</span>
+          </button>
+          <button class="nav-item" data-tab="mood" onclick="navigateTo('mood')">
+            <i class="fa-solid fa-face-smile"></i>
+            <span>Mood Lounge</span>
+          </button>
+          <button class="nav-item" data-tab="medicines" onclick="navigateTo('medicines')">
+            <i class="fa-solid fa-capsules"></i>
+            <span>Medicines</span>
+          </button>
+          <button class="nav-item" data-tab="appointments" onclick="navigateTo('appointments')">
+            <i class="fa-solid fa-calendar-check"></i>
+            <span>Appointments</span>
+          </button>
+          <button class="nav-item" data-tab="reports" onclick="navigateTo('reports')">
+            <i class="fa-solid fa-award"></i>
+            <span>Reports & Badges</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-user">
+          <div class="user-avatar" id="nav-user-avatar">R</div>
+          <div class="user-info">
+            <span class="user-name" id="nav-user-name">User</span>
+            <span class="user-email" id="nav-user-email">email@domain.com</span>
+          </div>
+          <button class="logout-btn" title="Logout" onclick="handleLogout()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+          </button>
+        </div>
+      </aside>
+
+      <!-- Main Content Area -->
+      <main class="content-area">
+        <!-- Top Banner Header -->
+        <header class="top-header">
+          <div class="header-left">
+            <h1 id="page-title">Overview Dashboard</h1>
+            <p id="page-subtitle" class="text-muted">Welcome back to your health companion</p>
+          </div>
+          <div class="header-right">
+            <div class="date-badge">
+              <i class="fa-regular fa-calendar"></i>
+              <span id="current-date-display">Today</span>
+            </div>
+            <button class="btn-secondary profile-btn" onclick="navigateTo('profile')">
+              <i class="fa-solid fa-user-gear"></i> Profile
+            </button>
+          </div>
+        </header>
+
+        <!-- VIEW 1: DASHBOARD -->
+        <section id="view-dashboard" class="tab-view active">
+          <!-- Top Metric Cards Row -->
+          <div class="metrics-grid">
+            <!-- Water Card -->
+            <div class="glass-card metric-card water-gradient" onclick="navigateTo('water')">
+              <div class="metric-icon"><i class="fa-solid fa-droplet"></i></div>
+              <div class="metric-content">
+                <span class="metric-label">Water Intake</span>
+                <div class="metric-value"><span id="dash-water-cups">0</span> / <span id="dash-water-goal">8</span> <small>cups</small></div>
+                <div class="progress-bar-bg">
+                  <div id="dash-water-bar" class="progress-bar-fill" style="width: 0%"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sleep Card -->
+            <div class="glass-card metric-card sleep-gradient" onclick="navigateTo('sleep')">
+              <div class="metric-icon"><i class="fa-solid fa-bed"></i></div>
+              <div class="metric-content">
+                <span class="metric-label">Sleep Duration</span>
+                <div class="metric-value"><span id="dash-sleep-hours">0</span> <small>hrs</small></div>
+                <span id="dash-sleep-quality" class="badge-pill">No Record</span>
+              </div>
+            </div>
+
+            <!-- Steps Card -->
+            <div class="glass-card metric-card activity-gradient" onclick="navigateTo('activity')">
+              <div class="metric-icon"><i class="fa-solid fa-person-running"></i></div>
+              <div class="metric-content">
+                <span class="metric-label">Daily Steps</span>
+                <div class="metric-value"><span id="dash-steps">0</span> <small>steps</small></div>
+                <span id="dash-steps-status" class="text-muted text-sm">Target: 8,000</span>
+              </div>
+            </div>
+
+            <!-- Mood Card -->
+            <div class="glass-card metric-card mood-gradient" onclick="navigateTo('mood')">
+              <div class="metric-icon"><i class="fa-solid fa-face-smile-beam"></i></div>
+              <div class="metric-content">
+                <span class="metric-label">Today's Mood</span>
+                <div class="metric-value capitalize" id="dash-mood-val">Not Logged</div>
+                <span id="dash-mood-emoji" class="mood-emoji-badge">✨</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Middle Row: Next Appointment & Active Meds -->
+          <div class="dashboard-row">
+            <!-- Next Appointment -->
+            <div class="glass-card flex-1">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-calendar-day text-primary"></i> Next Appointment</h3>
+                <button class="btn-link" onclick="navigateTo('appointments')">View All</button>
+              </div>
+              <div id="dash-appointment-box" class="dash-box">
+                <p class="text-muted">Loading appointments...</p>
+              </div>
+            </div>
+
+            <!-- Today's Medicine Reminders -->
+            <div class="glass-card flex-1">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-pills text-warning"></i> Today's Medicine Doses</h3>
+                <button class="btn-link" onclick="navigateTo('medicines')">Manage</button>
+              </div>
+              <div id="dash-medicines-box" class="dash-box">
+                <p class="text-muted">Loading medication schedule...</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 2: WATER TRACKER -->
+        <section id="view-water" class="tab-view hidden">
+          <div class="grid-2col">
+            <div class="glass-card text-center">
+              <div class="water-bottle-container">
+                <div class="water-glass">
+                  <div id="water-wave-fill" class="water-fill" style="height: 0%"></div>
+                  <div class="water-percent-text" id="water-percent-display">0%</div>
+                </div>
+              </div>
+              <h2 class="mt-4"><span id="water-cups-count">0</span> of <span id="water-goal-count">8</span> Cups</h2>
+              <p id="water-advice-msg" class="advice-box mt-2">Hydration keeps your mind sharp and your body energized!</p>
+              
+              <div class="btn-group mt-4">
+                <button class="btn-primary btn-lg" onclick="addWaterCup()">
+                  <i class="fa-solid fa-plus-circle"></i> Drink 1 Cup (+250ml)
+                </button>
+              </div>
+            </div>
+
+            <div class="glass-card">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-fire text-amber"></i> Water Streak</h3>
+                <span id="water-streak-badge" class="badge-pill bg-amber">🔥 0 Days</span>
+              </div>
+              <p class="text-muted mb-4">Drink 8 cups daily to keep your streak glowing!</p>
+              <canvas id="waterHistoryChart" height="200"></canvas>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 3: SLEEP STUDIO -->
+        <section id="view-sleep" class="tab-view hidden">
+          <div class="grid-2col">
+            <div class="glass-card">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-moon text-indigo"></i> Log Today's Sleep</h3>
+                <span id="sleep-streak-badge" class="badge-pill bg-indigo">🔥 0 Days Streak</span>
+              </div>
+
+              <form id="sleep-form" onsubmit="handleLogSleep(event)" class="mt-4">
+                <div class="form-row">
+                  <div class="input-group flex-1">
+                    <label><i class="fa-solid fa-bed"></i> Bedtime</label>
+                    <input type="time" id="sleep-start-time" value="23:00" required>
+                  </div>
+                  <div class="input-group flex-1">
+                    <label><i class="fa-solid fa-sun"></i> Wake Time</label>
+                    <input type="time" id="sleep-wake-time" value="07:00" required>
+                  </div>
+                </div>
+
+                <div class="input-group">
+                  <label><i class="fa-solid fa-star"></i> Sleep Quality</label>
+                  <div class="quality-selector">
+                    <label class="quality-option">
+                      <input type="radio" name="sleep-quality" value="Excellent" checked>
+                      <div class="quality-card">
+                        <i class="fa-solid fa-face-laugh-beam text-success"></i>
+                        <span>Excellent</span>
+                      </div>
+                    </label>
+                    <label class="quality-option">
+                      <input type="radio" name="sleep-quality" value="Good">
+                      <div class="quality-card">
+                        <i class="fa-solid fa-face-smile text-primary"></i>
+                        <span>Good</span>
+                      </div>
+                    </label>
+                    <label class="quality-option">
+                      <input type="radio" name="sleep-quality" value="Bad">
+                      <div class="quality-card">
+                        <i class="fa-solid fa-face-frown text-danger"></i>
+                        <span>Bad</span>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+
+                <button type="submit" class="btn-primary w-full mt-4">
+                  <i class="fa-solid fa-save"></i> Save Sleep Record
+                </button>
+              </form>
+            </div>
+
+            <div class="glass-card">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-chart-line text-indigo"></i> Sleep Duration & Advice</h3>
+              </div>
+              <div id="sleep-status-display" class="sleep-status-box my-4">
+                <p class="text-muted">Log your sleep to view feedback.</p>
+              </div>
+              <canvas id="sleepHistoryChart" height="180"></canvas>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 4: ACTIVITY HUB -->
+        <section id="view-activity" class="tab-view hidden">
+          <div class="grid-2col">
+            <div class="glass-card">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-person-running text-emerald"></i> Log Daily Activity</h3>
+                <span id="activity-streak-badge" class="badge-pill bg-emerald">🔥 0 Days Streak</span>
+              </div>
+
+              <form id="activity-form" onsubmit="handleLogActivity(event)" class="mt-4">
+                <div class="input-group">
+                  <label><i class="fa-solid fa-shoe-prints"></i> Steps Taken Today</label>
+                  <input type="number" id="act-steps" placeholder="e.g. 8000" min="0" required>
+                </div>
+                <div class="input-group">
+                  <label><i class="fa-solid fa-stopwatch"></i> Exercise Duration (Minutes)</label>
+                  <input type="number" id="act-duration" placeholder="e.g. 45" min="0" required>
+                </div>
+                <button type="submit" class="btn-primary w-full mt-4">
+                  <i class="fa-solid fa-save"></i> Save Activity Log
+                </button>
+              </form>
+            </div>
+
+            <div class="glass-card">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-history text-emerald"></i> Activity Log History</h3>
+              </div>
+              <div id="activity-history-table" class="table-wrapper mt-4">
+                <p class="text-muted">Loading activity history...</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-2col mt-6">
+            <div class="glass-card">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-chart-column text-emerald"></i> Activity Statistics</h3>
+              </div>
+              <div id="activity-statistics" class="stats-grid mt-4">
+                <p class="text-muted">Loading statistics...</p>
+              </div>
+            </div>
+            <div class="glass-card">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-bullseye text-cyan"></i> Daily Goals</h3>
+              </div>
+              <div id="activity-goals" class="goal-list mt-4">
+                <p class="text-muted">Loading goals...</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 5: MOOD LOUNGE -->
+        <section id="view-mood" class="tab-view hidden">
+          <div class="glass-card mb-6">
+            <div class="card-header">
+              <h3><i class="fa-solid fa-face-smile text-amber"></i> How are you feeling today?</h3>
+              <span id="mood-streak-badge" class="badge-pill bg-amber">🔥 0 Days Streak</span>
+            </div>
+            <p class="text-muted mb-4">Select your current mood state to log into your health journal.</p>
+
+            <div class="mood-grid">
+              <button class="mood-btn" onclick="logMood('happy')">
+                <span class="mood-emoji">😊</span>
+                <span class="mood-label">Happy</span>
+              </button>
+              <button class="mood-btn" onclick="logMood('excited')">
+                <span class="mood-emoji">🤩</span>
+                <span class="mood-label">Excited</span>
+              </button>
+              <button class="mood-btn" onclick="logMood('normal')">
+                <span class="mood-emoji">🙂</span>
+                <span class="mood-label">Normal</span>
+              </button>
+              <button class="mood-btn" onclick="logMood('tired')">
+                <span class="mood-emoji">🥱</span>
+                <span class="mood-label">Tired</span>
+              </button>
+              <button class="mood-btn" onclick="logMood('stressed')">
+                <span class="mood-emoji">😰</span>
+                <span class="mood-label">Stressed</span>
+              </button>
+              <button class="mood-btn" onclick="logMood('sad')">
+                <span class="mood-emoji">😢</span>
+                <span class="mood-label">Sad</span>
+              </button>
+              <button class="mood-btn" onclick="logMood('angry')">
+                <span class="mood-emoji">😡</span>
+                <span class="mood-label">Angry</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="grid-2col mb-6">
+            <div class="glass-card">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-chart-pie text-amber"></i> Mood Statistics</h3>
+              </div>
+              <div id="mood-statistics" class="stats-grid mt-4">
+                <p class="text-muted">Loading statistics...</p>
+              </div>
+            </div>
+            <div class="glass-card">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-heart text-rose"></i> Wellness Insight</h3>
+              </div>
+              <div id="mood-insight" class="advice-box mt-4">Keep logging your mood to discover patterns over time.</div>
+            </div>
+          </div>
+
+          <div class="glass-card">
+            <div class="card-header">
+              <h3><i class="fa-solid fa-calendar-days text-amber"></i> Mood History</h3>
+            </div>
+            <div id="mood-history-list" class="mood-history-wrapper mt-4">
+              <p class="text-muted">Loading mood logs...</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 6: MEDICINES -->
+        <section id="view-medicines" class="tab-view hidden">
+          <div class="card-header mb-4">
+            <h2><i class="fa-solid fa-capsules text-rose"></i> Prescribed Medication</h2>
+            <button class="btn-primary" onclick="openModal('add-medicine-modal')">
+              <i class="fa-solid fa-plus"></i> Add New Medicine
+            </button>
+          </div>
+
+          <div id="medication-notifications" class="notification-area mb-4"></div>
+
+          <div id="medicines-grid" class="cards-grid">
+            <p class="text-muted">Loading medicines...</p>
+          </div>
+        </section>
+
+        <!-- VIEW 7: APPOINTMENTS -->
+        <section id="view-appointments" class="tab-view hidden">
+          <div class="card-header mb-4">
+            <h2><i class="fa-solid fa-calendar-check text-cyan"></i> Medical Appointments</h2>
+            <button class="btn-primary" onclick="openModal('add-appointment-modal')">
+              <i class="fa-solid fa-plus"></i> Schedule Appointment
+            </button>
+          </div>
+
+          <div id="appointments-grid" class="cards-grid">
+            <p class="text-muted">Loading appointments...</p>
+          </div>
+        </section>
+
+        <!-- VIEW 8: HEALTH REPORTS & BADGES -->
+        <section id="view-reports" class="tab-view hidden">
+          <div class="report-controls mb-6">
+            <div class="segmented-control">
+              <button class="seg-btn active" onclick="loadReport('daily')">Daily Report</button>
+              <button class="seg-btn" onclick="loadReport('weekly')">Weekly Report</button>
+              <button class="seg-btn" onclick="loadReport('monthly')">Monthly Report</button>
+            </div>
+          </div>
+
+          <div class="grid-2col mb-6">
+            <!-- Score Wheel Card -->
+            <div class="glass-card text-center">
+              <h3>Health Score</h3>
+              <div class="score-ring-container my-4">
+                <div class="score-circle">
+                  <span id="report-score-num" class="score-number">0</span>
+                  <span class="score-max">/100</span>
+                </div>
+              </div>
+              <div id="report-status-badge" class="badge-pill bg-emerald lg-pill">Excellent</div>
+            </div>
+
+            <!-- Challenges Checklist Card -->
+            <div class="glass-card">
+              <h3><i class="fa-solid fa-trophy text-amber"></i> Daily Health Challenges</h3>
+              <div id="report-challenges-list" class="challenges-list mt-4">
+                <p class="text-muted">Loading challenges...</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Unlocked Badges Showcase -->
+          <div class="glass-card">
+            <h3><i class="fa-solid fa-medal text-amber"></i> Unlocked Achievements & Badges</h3>
+            <div id="report-badges-grid" class="badges-grid mt-4">
+              <p class="text-muted">Loading badges...</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 9: USER PROFILE -->
+        <section id="view-profile" class="tab-view hidden">
+          <div class="glass-card max-w-xl">
+            <div class="card-header">
+              <h2><i class="fa-solid fa-user-gear text-primary"></i> Profile Settings</h2>
+            </div>
+
+            <form id="profile-form" onsubmit="handleUpdateProfile(event)" class="mt-4">
+              <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" id="prof-name" required>
+              </div>
+              <div class="input-group">
+                <label>Email Address</label>
+                <input type="email" id="prof-email" required>
+              </div>
+              <hr class="divider">
+              <div class="input-group">
+                <label>Current Password (required for password change)</label>
+                <input type="password" id="prof-old-pass" placeholder="••••••••">
+              </div>
+              <div class="input-group">
+                <label>New Password</label>
+                <input type="password" id="prof-new-pass" placeholder="Leave empty to keep unchanged">
+              </div>
+
+              <div class="btn-group mt-6">
+                <button type="submit" class="btn-primary">Save Profile Changes</button>
+              </div>
+            </form>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- MODAL 1: ADD MEDICINE -->
+    <div id="add-medicine-modal" class="modal-backdrop hidden">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3><i class="fa-solid fa-capsules text-rose"></i> Add New Medicine</h3>
+          <button class="modal-close" onclick="closeModal('add-medicine-modal')">&times;</button>
+        </div>
+        <form id="add-medicine-form" onsubmit="handleCreateMedicine(event)">
+          <div class="input-group">
+            <label>Medicine Name</label>
+            <input type="text" id="med-name" placeholder="e.g. Aspirin" required>
+          </div>
+          <div class="input-group">
+            <label>Prescribed Dose</label>
+            <input type="text" id="med-dose" placeholder="e.g. 500mg or 2 pills" required>
+          </div>
+          <div class="input-group">
+            <label>Times Per Day (1 to 6)</label>
+            <input type="number" id="med-times-count" min="1" max="6" value="1" onchange="renderTimeInputs()" required>
+          </div>
+          <div id="med-time-inputs-container" class="input-group">
+            <!-- Dynamic time inputs generated here -->
+          </div>
+          <div class="form-row">
+            <div class="input-group flex-1">
+              <label>Start Date</label>
+              <input type="date" id="med-start-date" required>
+            </div>
+            <div class="input-group flex-1">
+              <label>End Date</label>
+              <input type="date" id="med-end-date" required>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn-secondary" onclick="closeModal('add-medicine-modal')">Cancel</button>
+            <button type="submit" class="btn-primary">Save Medicine</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- MODAL 2: ADD APPOINTMENT -->
+    <div id="add-appointment-modal" class="modal-backdrop hidden">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3><i class="fa-solid fa-calendar-plus text-cyan"></i> Schedule New Appointment</h3>
+          <button class="modal-close" onclick="closeModal('add-appointment-modal')">&times;</button>
+        </div>
+        <form id="add-appointment-form" onsubmit="handleCreateAppointment(event)">
+          <div class="input-group">
+            <label>Appointment Title</label>
+            <input type="text" id="appt-title" placeholder="e.g. Annual Dental Checkup" required>
+          </div>
+          <div class="input-group">
+            <label>Doctor's Name</label>
+            <input type="text" id="appt-doctor" placeholder="e.g. Dr. Sarah Jenkins" required>
+          </div>
+          <div class="input-group">
+            <label>Clinic / Hospital Name</label>
+            <input type="text" id="appt-clinic" placeholder="e.g. Central Health Center" required>
+          </div>
+          <div class="form-row">
+            <div class="input-group flex-1">
+              <label>Date</label>
+              <input type="date" id="appt-date" required>
+            </div>
+            <div class="input-group flex-1">
+              <label>Time</label>
+              <input type="time" id="appt-time" required>
+            </div>
+          </div>
+          <div class="input-group">
+            <label>Notes (Optional)</label>
+            <textarea id="appt-notes" rows="2" placeholder="e.g. Remember to bring previous X-rays"></textarea>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn-secondary" onclick="closeModal('add-appointment-modal')">Cancel</button>
+            <button type="submit" class="btn-primary">Schedule Appointment</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
