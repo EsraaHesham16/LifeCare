@@ -6,7 +6,7 @@ import json
 
 class MedicineProcesses:
     def __init__(self):
-        # here we calc list length after delete duplicated values
+        
         self.__medicine_list: list[Medicine] = []
         self.load_data()
 
