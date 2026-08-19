@@ -444,28 +444,28 @@ class Calories:
                     return
 
 
-while True:
-    person = Calories(456)
-    print(f'{"="*10} {"calories list"} {"="*10}')
-    option=input("1.add your data\n2.get your BMI\n3.get your TDEE (calories you need)\n4.add calories you have today\n5.show your progress in your daily need of calories\n6.edit on your data\n7.show your data\n8.suggestions to your meals\n9.back\n")
-    if option == "1":
-        person.add_data()
-    elif option =="2":
-        person.calculate_bmi()
-    elif option == "3":
-        person.calculate_calories()
-    elif option == "4":
-        person.add_calorie()
-    elif option == "5":
-        person.progress()
-    elif option == "6":
-        person.edit_data()
-    elif option == "7":
-        person.get_data()
-    elif option == "8":
-        person.suggestions()
-    elif option == "9":
-        break
-    else:
-        print("invalid input!\nplease try again")
-    enter=input("press to continue...")
+# while True:
+#     person = Calories(user_id)
+#     print(f'{"="*10} {"calories list"} {"="*10}')
+#     option=input("1.add your data\n2.get your BMI\n3.get your TDEE (calories you need)\n4.add calories you have today\n5.show your progress in your daily need of calories\n6.edit on your data\n7.show your data\n8.suggestions to your meals\n9.back\n")
+#     if option == "1":
+#         person.add_data()
+#     elif option =="2":
+#         person.calculate_bmi()
+#     elif option == "3":
+#         person.calculate_calories()
+#     elif option == "4":
+#         person.add_calorie()
+#     elif option == "5":
+#         person.progress()
+#     elif option == "6":
+#         person.edit_data()
+#     elif option == "7":
+#         person.get_data()
+#     elif option == "8":
+#         person.suggestions()
+#     elif option == "9":
+#         break
+#     else:
+#         print("invalid input!\nplease try again")
+#     enter=input("press to continue...")
