@@ -1,33 +1,40 @@
 import json
 from datetime import datetime , timedelta,date
 class Reports:
-    def show_badges(self,water,sleep,steps,mood,score,report_type):
-        if report_type=="daily" or report_type=="weekly":
-            if water >=8:
-                print("water master")
-            if sleep>=8:
-                print("sleep hero")
-            if steps >=8000:
-                print("step champion")
-            if mood=="happy" or mood=="excited":
-                print("positive mood")
-            if score==100:
-                print("healthy day")
-            if score>=80:
-                print("healthy life style")
-        else:
-            if water >=56:
-                print("water master")
-            if sleep>=56:
-                print("sleep hero")
-            if steps >=56000:
-                print("step champion")
-            if mood=="happy" or mood=="excited":
-                print("positive mood")
-            if score==100:
-                print("healthy day")
-            if score>=80:
-                print("healthy life style")
+    def get_goals(self, user_id):
+
+        with open("goals.json", "r") as file:
+            goals = json.load(file)
+
+        for goal in goals:
+            if goal["user_id"] == user_id:
+                return goal
+
+        return None
+
+    def show_badges(self, water, sleep, steps, mood, score,water_goal, steps_goal, report_type):
+
+        if report_type == "monthly":
+            water_goal = water_goal * 30
+            steps_goal = steps_goal * 30
+
+        if water >= water_goal:
+            print("water master")
+
+        if sleep >= 8:
+            print("sleep hero")
+
+        if steps >= steps_goal:
+            print("step champion")
+
+        if mood == "happy" or mood == "excited":
+            print("positive mood")
+
+        if score == 100:
+            print("healthy day")
+
+        if score >= 80:
+            print("healthy life style")
 
 
     def mood_score(self,mood):
@@ -42,16 +49,21 @@ class Reports:
         }
         return mood_points.get(mood.lower(),0)
 
-    def calculate_health_score(self,water,sleep,steps,mood):
-        score=0
-        if water>=8:
-            score+=25
-        if sleep>=8:
-            score+=25
-        if steps>=8000:
-            score+=25
+    def calculate_health_score(self, water, sleep, steps, mood,water_goal, steps_goal):
 
-        score+=self.mood_score(mood)
+        score = 0
+
+        if water >= water_goal:
+            score += 25
+
+        if sleep >= 8:
+            score += 25
+
+        if steps >= steps_goal:
+            score += 25
+
+        score += self.mood_score(mood)
+
         return score
 
     def overall_status(self,score):
@@ -61,17 +73,22 @@ class Reports:
             return"good"
         else:
             return "improve your self!"
-    def show_challenges(self,water,sleep,steps):
+
+    def show_challenges(self, water, sleep, steps, water_goal, steps_goal):
+
         print("\nchallenges")
-        if water>= 8:
+
+        if water >= water_goal:
             print("water challenge done")
         else:
             print("drink more water!")
+
         if sleep >= 8:
             print("sleep challenge done")
         else:
             print("sleep more!")
-        if steps >= 8000:
+
+        if steps >= steps_goal:
             print("activity challenge done")
         else:
             print("walk more!")
@@ -91,6 +108,10 @@ class Reports:
             appointments=json.load(file)
 
         print("\n========DAILY REPORT\n========")
+        goals = self.get_goals(user_id)
+        water_goal = goals["water_goal"]
+        steps_goal = goals["steps_goal"]
+
         today = str(datetime.now().date())
         water_cups=0
         sleep_hours=0
@@ -182,13 +203,33 @@ class Reports:
             if not found:
                 print("no appointments found")
 
+        score = self.calculate_health_score(
+            water_cups,
+            sleep_hours,
+            steps,
+            mood_status,
+            water_goal,
+            steps_goal
+        )
 
-        score=self.calculate_health_score(water_cups,sleep_hours,steps,mood_status )
+        print(f"\nhealth score: {score} /100")
 
-        print(f"\n health score:{score} /100")
-        self.show_challenges(water_cups,sleep_hours,steps )
-        self.show_badges(water_cups,sleep_hours,steps,mood_status,score,"daily")
+        self.show_challenges(
+            water_cups,
+            sleep_hours,
+            steps,
+            water_goal,
+            steps_goal )
 
+        self.show_badges(
+            water_cups,
+            sleep_hours,
+            steps,
+            mood_status,
+            score,
+            water_goal,
+            steps_goal,
+            "daily" )
         print(f"\n overall status: {self.overall_status(score)}")
 
 
@@ -207,6 +248,9 @@ class Reports:
             appointments=json.load(file)
 
         print("\n========WEEKLY REPORT========\n")
+        goals = self.get_goals(user_id)
+        water_goal = goals["water_goal"]
+        steps_goal = goals["steps_goal"]
 
         total_water=0
         total_sleep=0
@@ -306,44 +350,74 @@ class Reports:
             else:
                 print(f"total appointments: {appointment_count}")
 
-
-
-        score=self.calculate_health_score(average_water,average_sleep,average_steps ,mood_result )
+        score = self.calculate_health_score(
+            average_water,
+            average_sleep,
+            average_steps,
+            mood_result,
+            water_goal,
+            steps_goal
+        )
 
         print(f"\nhealth score: {score} /100")
-        self.show_challenges(average_water,average_sleep,average_steps )
-        self.show_badges(average_water,average_sleep,average_steps ,mood_result,score,"weekly")
 
+        self.show_challenges(
+            average_water,
+            average_sleep,
+            average_steps,
+            water_goal,
+            steps_goal
+        )
+
+        self.show_badges(
+            average_water,
+            average_sleep,
+            average_steps,
+            mood_result,
+            score,
+            water_goal,
+            steps_goal,
+            "weekly"
+        )
         print(f"\n overall status: {self.overall_status(score)}")
 
+    def calculate_monthly_score(self, water, sleep, steps, mood,  water_goal, steps_goal):
 
-    def calculate_monthly_score(self,water,sleep,steps,mood):
-        score=0
+        score = 0
 
-        if water>=56:
-             score+=25
-        if sleep>=56:
-             score+=25
-        if steps>=56000:
-             score+=25
+        if water >= water_goal:
+            score += 25
+
+        if sleep >= 56:
+            score += 25
+
+        if steps >= steps_goal:
+            score += 25
+
         score += self.mood_score(mood)
+
         return score
 
+    def show_monthly_challenges(self, water, sleep, steps,
+                                water_goal, steps_goal):
 
-    def show_monthly_challenges(self,water,sleep,steps):
         print("\nchallenges")
-        if water >= 56:
+
+        if water >= water_goal:
             print("water challenge done")
         else:
             print("drink more water!")
+
         if sleep >= 56:
             print("sleep challenge done")
         else:
             print("sleep more!")
-        if steps >= 56000:
+
+        if steps >= steps_goal:
             print("activity challenge done")
         else:
             print("walk more!")
+
 
     def monthly_report(self,user_id):
         with open("water.json", "r") as file:
@@ -360,6 +434,9 @@ class Reports:
             appointments=json.load(file)
 
         print("\n========MONTHLY REPORT========\n")
+        goals = self.get_goals(user_id)
+        water_goal = goals["water_goal"] * 30
+        steps_goal = goals["steps_goal"] * 30
 
         total_water=0
         total_sleep = 0
@@ -450,10 +527,33 @@ class Reports:
 
         # score=self.calculate_health_score(total_water,total_sleep ,total_steps )
 
-        score = self.calculate_monthly_score(total_water, total_sleep, total_steps,mood_result )
+        score = self.calculate_monthly_score(
+            total_water,
+            total_sleep,
+            total_steps,
+            mood_result,
+            water_goal,
+            steps_goal
+        )
 
-        print(f"\n health score:{score} /100")
-        self.show_monthly_challenges(total_water,total_sleep,total_steps )
-        self.show_badges(total_water , total_sleep , total_steps , mood_result, score, "monthly")
+        print(f"\nhealth score: {score} /100")
 
+        self.show_monthly_challenges(
+            total_water,
+            total_sleep,
+            total_steps,
+            water_goal,
+            steps_goal
+        )
+
+        self.show_badges(
+            total_water,
+            total_sleep,
+            total_steps,
+            mood_result,
+            score,
+            water_goal,
+            steps_goal,
+            "monthly"
+        )
         print(f"\n overall status: {self.overall_status(score)}")

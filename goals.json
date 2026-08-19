@@ -1,0 +1,17 @@
+[
+    {
+        "user_id": 1,
+        "water_goal": 8,
+        "steps_goal": 8000
+    },
+    {
+        "user_id": 2,
+        "water_goal": 10,
+        "steps_goal": 10000
+    },
+    {
+        "user_id": 3,
+        "water_goal": 6,
+        "steps_goal": 6000
+    }
+]
