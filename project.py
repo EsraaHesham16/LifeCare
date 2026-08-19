@@ -7,6 +7,7 @@ from dashboard import DashBoard
 from report  import Reports
 from MedicineProcesses import MedicineProcesses
 from Appointmentmanager import AppointmentManager
+from calories import Calories
 
 medicine_manager=MedicineProcesses()
 appointment_manager=AppointmentManager()
@@ -248,10 +249,36 @@ def report(user_id):
     else:
         print("invalid choice")
 
+def calories():
+    while True:
+    person = Calories(user_id)
+    print(f'{"="*10} {"calories list"} {"="*10}')
+    option=input("1.add your data\n2.get your BMI\n3.get your TDEE (calories you need)\n4.add calories you have today\n5.show your progress in your daily need of calories\n6.edit on your data\n7.show your data\n8.suggestions to your meals\n9.back\n")
+    if option == "1":
+        person.add_data()
+    elif option =="2":
+        person.calculate_bmi()
+    elif option == "3":
+        person.calculate_calories()
+    elif option == "4":
+        person.add_calorie()
+    elif option == "5":
+        person.progress()
+    elif option == "6":
+        person.edit_data()
+    elif option == "7":
+        person.get_data()
+    elif option == "8":
+        person.suggestions()
+    elif option == "9":
+        break
+    else:
+        print("invalid input!\nplease try again")
+    enter=input("press to continue...")
 
 open_program()
 while program:
-    print("1.Profile\n2.Water Tracker\n3.Sleep Tracker\n4.Mood Tracker\n5.Activity\n6.Appointment\n7.Medicines\n8.Report\n9.Dashboard\n10.Close Program")
+    print("1.Profile\n2.Water Tracker\n3.Sleep Tracker\n4.Mood Tracker\n5.Activity\n6.Appointment\n7.Medicines\n8.Report\n9.Dashboard\n10.Calories\n11.Close Program")
     option=input("Enter your choice")
     if  option=="1":
         profile()
@@ -272,7 +299,9 @@ while program:
     elif option=="9":
         dashboard = DashBoard()
         dashboard.show_dashboard(user_id)
-    elif option=="10":
+    elif option == "10":
+        calories()
+    elif option=="11":
         break
     else:
         print("Invalid")
