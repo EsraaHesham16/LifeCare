@@ -282,31 +282,31 @@ def calories():
     enter=input("press to continue...")
 def to_do():
     while True:
-        print(f"{"="*10} TO-DO LIST {"="*10}")
-        user=To_Do(user_id)
+        print(f"{"=" * 10} TO-DO LIST {"=" * 10}")
+        user = To_Do(user_id)
         print(f"1.Add Task/n2.View Task\n3.Edit Task\n4.Delete Task\n5.Mark task as Completed\n6.Exit")
         try:
-            choice=int(input("choose an option")
+            choice= int(input("choose an option"))
         except ValueError:
             print("Invalid input.Please enter a task number.")
-                continue
-        choice=int(input("choose an option")
-        if choice=="1":
+            continue
+        choice = int(input("choose an option"))
+        if choice == "1":
             user.add_task()
             continue
-        if choice=="2":
+        elif choice == "2":
             user.view_tasks()
             continue
-        if choice=="3":
+        elif choice == "3":
             user.edit_task()
             continue
-        if choice=="4":
+        elif choice == "4":
             user.delete_task()
             continue
-         if choice=="5":
+        elif choice == "5":
             user.mark_completed()
             continue
-         if choice=="6":
+        if choice == "6":
             break
 open_program()
 while program:
