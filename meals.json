@@ -1,0 +1,93 @@
+{
+  "lose": {
+    "breakfast": [
+      "Oatmeal with low-fat milk and berries",
+      "2 boiled eggs + whole-grain toast + vegetables",
+      "Greek yogurt + apple",
+      "Cottage cheese + whole-grain toast + vegetables",
+      "Vegetable omelet + whole-grain toast"
+    ],
+    "lunch": [
+      "Grilled chicken + rice + salad",
+     "Grilled fish + roasted potatoes + vegetables",
+     "Lean beef + rice + salad",
+     "Grilled chicken salad + whole-grain bread",
+     "Tuna salad + whole-grain bread"
+    ],
+    "dinner": [
+      "Grilled chicken salad",
+     "Tuna salad + whole-grain toast",
+     "2 eggs + vegetables + whole-grain toast",
+     "Grilled fish + vegetables",
+     "Greek yogurt + fruit + a small portion of nuts"
+    ],
+    "snacks": [
+      "Apple",
+     "Orange",
+     "Greek yogurt",
+     "A handful of nuts",
+     "Carrot sticks",
+     "Cucumber slices"
+    ]
+  },
+  "gain": {
+    "breakfast": [
+      "Oatmeal + whole milk + banana + peanut butter",
+     "3 eggs + cheese + whole-grain bread",
+     "Greek yogurt + oats + banana + nuts",
+     "Cheese sandwich + avocado",
+     "Oatmeal + milk + dried fruits + nuts"
+    ],
+    "lunch": [
+      "Chicken + rice + vegetables + olive oil",
+     "Beef + pasta + vegetables",
+     "Grilled fish + rice + avocado",
+     "Chicken + potatoes + vegetables + olive oil",
+     "Beef + rice + avocado + salad"
+    ],
+    "dinner": [
+      "Chicken sandwich + cheese + vegetables",
+    "Eggs + potatoes + whole-grain bread",
+    "Tuna pasta + vegetables",
+    "Chicken + rice + avocado",
+    "Cheese omelet + bread + vegetables"
+    ],
+    "snacks": [
+      "Banana + peanut butter",
+    "Nuts + dried fruit",
+    "Yogurt + oats + fruit",
+    "Milk + banana + peanut butter",
+    "Whole-grain toast + peanut butter"
+    ]
+  },
+  "maintain":{
+    "breakfast": [
+      "Oatmeal with milk and banana",
+    "2 eggs + whole-grain toast + vegetables",
+    "Greek yogurt + oats + fruit",
+    "Cheese sandwich + vegetables",
+    "Vegetable omelet + whole-grain toast"
+    ],
+    "lunch": [
+      "Grilled chicken + rice + vegetables",
+    "Grilled fish + potatoes + salad",
+    "Lean beef + pasta + vegetables",
+    "Chicken sandwich + salad",
+    "Tuna + rice + vegetables"
+    ],
+    "dinner": [
+      "Chicken sandwich + salad",
+    "Tuna + whole-grain bread + vegetables",
+    "Omelet + whole-grain toast + salad",
+    "Grilled fish + vegetables",
+    "Chicken salad + bread"
+    ],
+    "snacks": [
+      "Apple + yogurt",
+    "Banana",
+    "A handful of nuts",
+    "Peanut butter + whole-grain toast",
+    "Milk + fruit"
+    ]
+  }
+}
