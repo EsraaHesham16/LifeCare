@@ -182,7 +182,7 @@ def appointments_menu(appointment_manager, user_id):
             appointment_manager.delete_appointment(user_id)
 
         elif choice == "7":
-            appointment_manager.update_status(user_id)
+            appointment_manager.update_appointment_status(user_id)
 
         elif choice == "8":
             appointment_manager.view_today_appointments(user_id)
