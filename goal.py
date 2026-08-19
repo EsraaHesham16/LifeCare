@@ -18,13 +18,13 @@ class Goals:
             }
             goals.append(user_goal )
 
-            with open("goals.json","r") as file:
+            with open("goals.json","w") as file:
                 json.dump(goals, file, indent=4)
 
         print("\n==========MY GOALS==========")
         print("current goals: ")
-        print(f"water: {user_goal["water_goal"]} cups")
-        print(f"steps: {user_goal["steps_goal"]} ")
+        print(f"water: {user_goal['water_goal']} cups")
+        print(f"steps: {user_goal['steps_goal']} ")
 
         print("\n1. keep current goals")
         print("2. change goals")
