@@ -62,11 +62,8 @@ class Appointment:
         return self.__date
 
     @date.setter
-    def date(self, value):
-        if value >= datetime.now().date():
-            self.__date = value
-        else:
-            raise ValueError("Appoinment date MUST be today date or after that not before!")
+    def date(self, value):    
+        self.__date = value
 
     @property
     def time(self):
