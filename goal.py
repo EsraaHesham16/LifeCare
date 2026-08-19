@@ -1,5 +1,4 @@
 import json
-
 class Goals:
     def menu(self,user_id):
         with open("goals.json","r") as file:
@@ -30,7 +29,7 @@ class Goals:
         print("2. change goals")
         print("3. back")
 
-        choice=input("enter your choice: ")
+        choice=input("enter your choice:")
 
         if choice=="1":
             print("current goal kept")

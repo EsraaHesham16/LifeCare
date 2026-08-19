@@ -64,7 +64,7 @@ class SleepTracker:
                 else:
                     break
             while True:
-                quality_num = int(input("Sleep Quality:\n1.Excellent\n2.Good\n3.Bad\n"))
+                quality_num = int(input("Sleep Quality:\n1.Excellent\n2.Good\n3.Bad\n\nEnter your choice:"))
                 if quality_num == 1:
                     quality = "Excellent"
                     break

@@ -13,5 +13,10 @@
         "user_id": 3,
         "water_goal": 6,
         "steps_goal": 6000
+    },
+    {
+        "user_id": "33",
+        "water_goal": 9,
+        "steps_goal": 9000
     }
 ]

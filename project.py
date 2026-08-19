@@ -8,10 +8,10 @@ from report  import Reports
 from MedicineProcesses import MedicineProcesses
 from Appointmentmanager import AppointmentManager
 from calories import Calories
-from goals import Goals
+from goal import Goals
 from todo import To_Do
-medicine_manager=MedicineProcesses()
-appointment_manager=AppointmentManager()
+#medicine_manager=MedicineProcesses()
+#appointment_manager=AppointmentManager()
 user1=User()
 program=False
 
@@ -70,9 +70,8 @@ def profile():
 def water():
     person = WaterTracker(user_id)
     print("========= Water Tracker ===========")
-    print("Today's Goal: 8")
     while True:
-        option = int(input("1.Add cup\n2.View today's water\n3.View history water\n4.back"))
+        option = int(input("1.Add cup\n2.View today's water\n3.View history water\n4.back\nEnter your choice:"))
         if option == 1:
             person.add_cup()
         elif option == 2:
@@ -88,7 +87,7 @@ def sleep():
     person = SleepTracker(user_id)
     print("========= Sleep Tracker =============")
     while True:
-        option = int(input("1.Add Today's Sleep\n2.View Today's Sleep\n3.View Sleep History\n4.back"))
+        option = int(input("1.Add Today's Sleep\n2.View Today's Sleep\n3.View Sleep History\n4.back\nEnter your choice:"))
         if option == 1:
             person.add_sleep()
         elif option == 2:
@@ -182,7 +181,7 @@ def appointments_menu(appointment_manager, user_id):
             appointment_manager.delete_appointment(user_id)
 
         elif choice == "7":
-            appointment_manager.update_appointment_status(user_id)
+            appointment_manager.update_status(user_id)
 
         elif choice == "8":
             appointment_manager.view_today_appointments(user_id)
@@ -281,16 +280,15 @@ def calories():
             print("invalid input!\nplease try again")
         enter=input("press to continue...")
 def to_do():
+    user = To_Do(user_id)
     while True:
         print(f"{"=" * 10} TO-DO LIST {"=" * 10}")
-        user = To_Do(user_id)
-        print(f"1.Add Task/n2.View Task\n3.Edit Task\n4.Delete Task\n5.Mark task as Completed\n6.Exit")
+        print(f"1.Add Task\n2.View Task\n3.Edit Task\n4.Delete Task\n5.Mark task as Completed\n6.Exit")
         try:
-            choice= int(input("choose an option"))
+            choice= input("choose an option:")
         except ValueError:
             print("Invalid input.Please enter a task number.")
             continue
-        choice = int(input("choose an option"))
         if choice == "1":
             user.add_task()
             continue
@@ -314,7 +312,7 @@ def to_do():
 open_program()
 while program:
     print("1.Profile\n2.Water Tracker\n3.Sleep Tracker\n4.Mood Tracker\n5.Activity\n6.Appointment\n7.Medicines\n8.Report\n9.Dashboard\n10.Calories\n11.my goals\n12.To Do\n13.Close Program")
-    option=input("Enter your choice")
+    option=input("Enter your choice:")
     if  option=="1":
         profile()
     elif option=="2":
@@ -325,10 +323,10 @@ while program:
         mood()
     elif option=="5":
         activity()
-    elif option=="6":
-        appointments_menu(appointment_manager, user_id) #-------------
-    elif option=="7":
-        medicines_menu(medicine_manager, user_id) #------------------
+    #elif option=="6":
+        #appointments_menu(appointment_manager, user_id) #-------------
+    #elif option=="7":
+        #medicines_menu(medicine_manager, user_id) #------------------
     elif option=="8":
         report(user_id)
     elif option=="9":
