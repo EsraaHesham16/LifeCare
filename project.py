@@ -10,8 +10,8 @@ from Appointmentmanager import AppointmentManager
 from calories import Calories
 from goal import Goals
 from todo import To_Do
-#medicine_manager=MedicineProcesses()
-#appointment_manager=AppointmentManager()
+medicine_manager=MedicineProcesses()
+appointment_manager=AppointmentManager()
 user1=User()
 program=False
 
@@ -323,10 +323,10 @@ while program:
         mood()
     elif option=="5":
         activity()
-    #elif option=="6":
-        #appointments_menu(appointment_manager, user_id) #-------------
-    #elif option=="7":
-        #medicines_menu(medicine_manager, user_id) #------------------
+    elif option=="6":
+        appointments_menu(appointment_manager, user_id) #-------------
+    elif option=="7":
+        medicines_menu(medicine_manager, user_id) #------------------
     elif option=="8":
         report(user_id)
     elif option=="9":
