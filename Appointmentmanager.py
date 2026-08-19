@@ -41,7 +41,11 @@ class AppointmentManager():
             date = input("Enter appointment date: ").strip()
             try:
                 date = datetime.strptime(date, "%Y-%m-%d").date()
+                if date < datetime.now().date():
+                    print("Appointment date cannot be before today.")
+                    continue
                 break
+
             except ValueError:
                 print("Invalid date, enter the date as %Y-%m-%d.")
 
@@ -49,19 +53,25 @@ class AppointmentManager():
             time = input("Enter appointment time: ").strip()
             try:
                 time = datetime.strptime(time, "%H:%M").time()
+
+                appointment_datetime = datetime.combine(date, time)
+                if appointment_datetime <= datetime.now():
+                    print("Appointment must be in the future.")
+                    continue
                 break
             except ValueError:
                 print("Invalid time, enter the time as %H:%M.")
+
 
         for appointment in self.__appointment_list:
             if str(appointment.user_id) == str(user_id) and appointment.date == date and appointment.time == time:
                 print("You already have an appointment at this date and time exactly.")
                 return
 
-        appointment_datetime = datetime.combine(date, time)
-        if appointment_datetime <= datetime.now():
-            print("Appointment Must be in the future.")
-            return
+        # appointment_datetime = datetime.combine(date, time)
+        # if appointment_datetime <= datetime.now():
+        #     print("Appointment Must be in the future.")
+        #     return
 
         notes = input("Enter notes (optional): ").strip()
         appointment = Appointment(appointment_id, user_id, title, doctor, clinic, date, time, notes)
@@ -402,7 +412,16 @@ class AppointmentManager():
          self.__appointment_list.append(appointment)
 
 
-    def get_all_appointmentss(self):
+    def get_all_appointments(self, user_id):
+        appointments = []
+
+        for appointment in self.__appointment_list:
+            if appointment.user_id == user_id:
+                appointments.append(appointment)
+
+        return appointments
+
+    def get_all_appointments_for_notifications(self):
         return self.__appointment_list
 
     def view_today_appointments(self, user_id):
