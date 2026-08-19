@@ -306,8 +306,11 @@ def to_do():
         elif choice == "5":
             user.mark_completed()
             continue
-        if choice == "6":
+        elif choice == "6":
             break
+        else:
+            print("invalid input!\nplease try again")
+            continue
 open_program()
 while program:
     print("1.Profile\n2.Water Tracker\n3.Sleep Tracker\n4.Mood Tracker\n5.Activity\n6.Appointment\n7.Medicines\n8.Report\n9.Dashboard\n10.Calories\n11.my goals\n12.To Do\n13.Close Program")
