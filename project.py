@@ -8,7 +8,7 @@ from report  import Reports
 from MedicineProcesses import MedicineProcesses
 from Appointmentmanager import AppointmentManager
 from calories import Calories
-
+from goals import Goals
 medicine_manager=MedicineProcesses()
 appointment_manager=AppointmentManager()
 user1=User()
@@ -249,6 +249,10 @@ def report(user_id):
     else:
         print("invalid choice")
 
+def goals():
+    goal=Goals()
+    goal.menu(user_id)
+
 def calories():
     while True:
     person = Calories(user_id)
@@ -278,7 +282,7 @@ def calories():
 
 open_program()
 while program:
-    print("1.Profile\n2.Water Tracker\n3.Sleep Tracker\n4.Mood Tracker\n5.Activity\n6.Appointment\n7.Medicines\n8.Report\n9.Dashboard\n10.Calories\n11.Close Program")
+    print("1.Profile\n2.Water Tracker\n3.Sleep Tracker\n4.Mood Tracker\n5.Activity\n6.Appointment\n7.Medicines\n8.Report\n9.Dashboard\n10.Calories\n11.my goals\n12.Close Program")
     option=input("Enter your choice")
     if  option=="1":
         profile()
@@ -302,6 +306,8 @@ while program:
     elif option == "10":
         calories()
     elif option=="11":
+        goals()
+    elif option=="12":
         break
     else:
         print("Invalid")
