@@ -1,4 +1,4 @@
-﻿import random as r
+import random as r
 from datetime import datetime
 from medicine import Medicine
 import json
@@ -57,6 +57,10 @@ class MedicineProcesses:
             start_date = input("Enter the start date for This Medicine (YYYY-MM-DD): ").strip()
             try:
                 start_date = datetime.strptime(start_date, "%Y-%m-%d").date()
+
+                if start_date < datetime.now().date():
+                    print("Start date MUST be today date or after that not before!")
+                    continue
                 break
             except ValueError:
                 print("Invalid date. Enter the date as YYYY-MM-DD.")
@@ -455,6 +459,8 @@ class MedicineProcesses:
             if medicine.user_id == user_id:
                 medicines.append(medicine)
         return medicines
+    def get_all_medicines_for_notifications(self):
+        return self.__medicine_list
 
     def show_notifications(self, user_id):
         today = datetime.now().date()
