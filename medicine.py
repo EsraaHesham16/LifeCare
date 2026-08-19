@@ -81,11 +81,8 @@ class Medicine:
 
     @start_date.setter
     def start_date(self, value):
-        if value >= datetime.now().date():
-            self.__start_date = value
-        else:
-            raise ValueError("Start date MUST be today date or after that not before!")
-
+       self.__start_date = value
+       
     @property
     def end_date(self):
         return self.__end_date
