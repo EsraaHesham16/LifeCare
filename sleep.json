@@ -68,5 +68,12 @@
         "hours": 8.0,
         "quality": "Good",
         "goal": 8
+    },
+    {
+        "user_id": "33",
+        "date": "2026-08-20",
+        "hours": 22.0,
+        "quality": "Excellent",
+        "goal": 8
     }
 ]
