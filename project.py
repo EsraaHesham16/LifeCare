@@ -9,6 +9,7 @@ from MedicineProcesses import MedicineProcesses
 from Appointmentmanager import AppointmentManager
 from calories import Calories
 from goals import Goals
+from todo import To_Do
 medicine_manager=MedicineProcesses()
 appointment_manager=AppointmentManager()
 user1=User()
@@ -279,10 +280,37 @@ def calories():
     else:
         print("invalid input!\nplease try again")
     enter=input("press to continue...")
-
+def to_do():
+    while True:
+        print(f"{"="*10} TO-DO LIST {"="*10}")
+        user=To_Do(user_id)
+        print(f"1.Add Task/n2.View Task\n3.Edit Task\n4.Delete Task\n5.Mark task as Completed\n6.Exit")
+        try:
+            choice=int(input("choose an option")
+        except ValueError:
+            print("Invalid input.Please enter a task number.")
+                continue
+        choice=int(input("choose an option")
+        if choice=="1":
+            user.add_task()
+            continue
+        if choice=="2":
+            user.view_tasks()
+            continue
+        if choice=="3":
+            user.edit_task()
+            continue
+        if choice=="4":
+            user.delete_task()
+            continue
+         if choice=="5":
+            user.mark_completed()
+            continue
+         if choice=="6":
+            break
 open_program()
 while program:
-    print("1.Profile\n2.Water Tracker\n3.Sleep Tracker\n4.Mood Tracker\n5.Activity\n6.Appointment\n7.Medicines\n8.Report\n9.Dashboard\n10.Calories\n11.my goals\n12.Close Program")
+    print("1.Profile\n2.Water Tracker\n3.Sleep Tracker\n4.Mood Tracker\n5.Activity\n6.Appointment\n7.Medicines\n8.Report\n9.Dashboard\n10.Calories\n11.my goals\n12.To Do\n13.Close Program")
     option=input("Enter your choice")
     if  option=="1":
         profile()
@@ -308,6 +336,8 @@ while program:
     elif option=="11":
         goals()
     elif option=="12":
+         to_do()              
+    elif option=="13":
         break
     else:
         print("Invalid")
